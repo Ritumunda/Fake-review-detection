@@ -1,0 +1,22 @@
+from fastapi import FastAPI
+import joblib
+import numpy as np
+from tensorflow.keras.models import load_model
+scaler = joblib.load('scaler.pkl')  # Load scaler
+tfidf = joblib.load('tfidf_vectorizer.pkl')  # Load TF-IDF vectorizer
+model = load_model('fake_review_model_with_attention.h5')  # Load DNN model
+app = FastAPI()
+@app.post("/predict/")
+def predict_review(review: str):
+    try:
+        tfidf_vector = tfidf.transform([review])  # Convert review to TF-IDF features
+        scaled_vector = scaler.transform(tfidf_vector.toarray())  # Apply scaling
+        prediction = model.predict(scaled_vector)[0][0]  # Get model prediction
+
+        return {
+            "review": review,
+            "is_fake": bool(prediction < 0.5),  # True if fake, False if real
+            "confidence": round(prediction, 2)  # Round confidence score
+        }
+    except Exception as e:
+        return {"error": str(e)}

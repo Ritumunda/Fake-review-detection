@@ -1,0 +1,9 @@
+from sklearn.preprocessing import StandardScaler
+import joblib
+
+# Example: suppose X_train contains your TF-IDF features
+scaler = StandardScaler()
+scaler.fit(X_train)  # Fit on training data
+
+# Save the fitted scaler to a .pkl file
+joblib.dump(scaler, 'scaler.pkl')  # ✅ This creates the file automatically
