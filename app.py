@@ -1,3 +1,7 @@
+from fastapi import FastAPI
+
+app = FastAPI()
+
 # ✅ Import necessary libraries
 import streamlit as st
 import numpy as np
