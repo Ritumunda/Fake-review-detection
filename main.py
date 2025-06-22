@@ -42,12 +42,14 @@ translator = Translator()
 
 # Load models
 try:
+    # model loading
     scaler = joblib.load('scaler.pkl')
     tfidf = joblib.load('tfidf_vectorizer.pkl')
     model = load_model('fake_review_model_with_attention.h5')
 except Exception as e:
     st.error(f"❌ Error loading models: {str(e)}")
-   st.stop()
+    st.stop()
+
 
 # Style block
 st.markdown("""<style>
