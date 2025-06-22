@@ -49,7 +49,6 @@ except Exception as e:
     st.error(f"❌ Error loading models: {str(e)}")
     st.stop()
 
-
 # Style block
 st.markdown("""<style>
 /* App background */
