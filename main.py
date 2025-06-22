@@ -192,9 +192,9 @@ if st.button(L['analyze'], key="analyze_button"):
                 st.error("⚠️ This is a duplicate review submission.")
             else:
                 try:
-                    #vector = tfidf.transform([review_text])
-                    #scaled = scaler.transform(vector.toarray())
-                    #pred = model.predict(scaled)[0][0]
+                    vector = tfidf.transform([review_text])
+                    scaled = scaler.transform(vector.toarray())
+                    pred = model.predict(scaled)[0][0]
                     if pred > 0.5:
                         st.success(f"✅ Review is likely REAL (Confidence: {pred:.2f})")
                     else:
